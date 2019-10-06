@@ -24,7 +24,8 @@ $('html').height(180);
         let secondPref = "HI";
         
         selectElement('firstPref',firstPref);
-        selectElement('secondPref',secondPref)
+        selectElement('secondPref',secondPref);
+        chrome.storage.sync.set({'translatePrefs': [firstPref,secondPref]});
       }
   });
 
