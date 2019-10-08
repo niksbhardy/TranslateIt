@@ -36,9 +36,26 @@ chrome.contextMenus.onClicked.addListener(function (clickedData) {
         };
 
         chrome.windows.create(createData, function (newWindow) {
-          //console.log(newWindow);
           chrome.tabs.executeScript(newWindow.tabs[0].id, {
-            //code: 'document.write("hello world");'
+          });
+        });
+      }
+      else{
+        firstPref = "EN";
+        secondPref = "HI";
+        chrome.storage.sync.set({'translatePrefs': [firstPref,secondPref]});
+        var translateUrl = `https://translate.google.co.in/#${firstPref}/${secondPref}/${clickedData.selectionText}`
+        var createData = {
+          "url": translateUrl,
+          "type": "popup",
+          "top": 5,
+          "left": 5,
+          "width": screen.availWidth / 2,
+          "height": screen.availHeight / 2
+        };
+
+        chrome.windows.create(createData, function (newWindow) {
+          chrome.tabs.executeScript(newWindow.tabs[0].id, {
           });
         });
       }
